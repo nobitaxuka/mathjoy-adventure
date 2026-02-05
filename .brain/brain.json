@@ -1,0 +1,16 @@
+{
+  "project_name": "MathJoy Adventure",
+  "tech_stack": {
+    "frontend": "Next.js 15 (App Router)",
+    "styling": "Tailwind CSS",
+    "language": "TypeScript",
+    "game_logic": "Custom React Hooks / Context API"
+  },
+  "core_patterns": [
+    "Agile - One feature per day",
+    "Regression testing before new features",
+    "Clean Architecture",
+    "Premium UI/UX for kids"
+  ],
+  "status": "Initializing"
+}
