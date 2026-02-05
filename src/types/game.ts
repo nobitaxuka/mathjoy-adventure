@@ -10,7 +10,14 @@ export interface Question {
   options?: string[]; // Multiple choice options
   correctAnswer: string;
   imageUrl?: string; // Optional image for the question
+  category: "CALCULATION" | "NUMBER_RECOGNITION";
+  tags: {
+    ageGroup: "3-4" | "5-6" | "7+";
+    difficulty: "EASY" | "MEDIUM" | "HARD";
+  };
 }
+
+export type AgeGroup = "3-4" | "5-6" | "7+";
 
 export interface GameState {
   status: GameStatus;
@@ -19,4 +26,5 @@ export interface GameState {
   lives: number;
   currentQuestionIndex: number;
   questions: Question[];
+  selectedAgeGroup: AgeGroup | null;
 }

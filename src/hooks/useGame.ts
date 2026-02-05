@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback, useEffect } from "react";
-import { GameState, GameStatus, Question } from "@/types/game";
+import { GameState, GameStatus, Question, AgeGroup } from "@/types/game";
 import { getRandomQuestions } from "@/lib/engine";
 
 const INITIAL_LIVES = 3;
@@ -17,6 +17,7 @@ export const useGame = () => {
         lives: INITIAL_LIVES,
         currentQuestionIndex: 0,
         questions: [],
+        selectedAgeGroup: null,
     });
 
     // Load progress from LocalStorage
@@ -27,12 +28,18 @@ export const useGame = () => {
         }
     }, []);
 
+    const selectAgeGroup = useCallback((age: AgeGroup) => {
+        setState(prev => ({ ...prev, selectedAgeGroup: age }));
+    }, []);
+
     const selectLevel = useCallback((level: number) => {
         setState(prev => ({ ...prev, currentLevel: level }));
     }, []);
 
     const startGame = useCallback(() => {
-        const questions = getRandomQuestions(state.currentLevel, QUESTIONS_PER_LEVEL);
+        if (!state.selectedAgeGroup) return;
+
+        const questions = getRandomQuestions(state.selectedAgeGroup, state.currentLevel, QUESTIONS_PER_LEVEL);
         setState((prev) => ({
             ...prev,
             status: "PLAYING",
@@ -41,7 +48,7 @@ export const useGame = () => {
             currentQuestionIndex: 0,
             questions,
         }));
-    }, [state.currentLevel]);
+    }, [state.selectedAgeGroup, state.currentLevel]);
 
     const answerQuestion = useCallback((answer: string) => {
         setState((prev) => {
@@ -89,6 +96,7 @@ export const useGame = () => {
         ...state,
         maxUnlockedLevel,
         currentQuestion: state.questions[state.currentQuestionIndex],
+        selectAgeGroup,
         selectLevel,
         startGame,
         answerQuestion,
