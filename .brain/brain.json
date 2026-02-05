@@ -1,16 +1,61 @@
 {
-  "project_name": "MathJoy Adventure",
-  "tech_stack": {
-    "frontend": "Next.js 15 (App Router)",
-    "styling": "Tailwind CSS",
-    "language": "TypeScript",
-    "game_logic": "Custom React Hooks / Context API"
+  "meta": {
+    "schema_version": "1.1.0",
+    "awf_version": "4.0.0"
   },
-  "core_patterns": [
-    "Agile - One feature per day",
-    "Regression testing before new features",
-    "Clean Architecture",
-    "Premium UI/UX for kids"
+  "project": {
+    "name": "MathJoy Adventure",
+    "type": "Web App (Gamification)",
+    "status": "MVP Beta"
+  },
+  "tech_stack": {
+    "frontend": {
+      "framework": "Next.js 15 (App Router)",
+      "styling": "Tailwind CSS",
+      "animation": "Framer Motion",
+      "icons": "Lucide React"
+    },
+    "logic": {
+      "language": "TypeScript",
+      "state_management": "Custom React Hooks (useGame)",
+      "persistence": "LocalStorage"
+    }
+  },
+  "features": [
+    {
+      "name": "Game Engine",
+      "description": "Randomized 10-question sessions from a 30-question bank per level."
+    },
+    {
+      "name": "Life System",
+      "description": "3-lives mechanic. Game over upon 4th mistake."
+    },
+    {
+      "name": "Level Mapping",
+      "description": "Level selection with unlock progression based on performance."
+    },
+    {
+      "name": "Animation System",
+      "description": "Rich UI feedback with Framer Motion (Slide, Shake, Scale)."
+    },
+    {
+      "name": "Audio System",
+      "description": "Sound triggers for correct, wrong, victory, and click events."
+    }
   ],
-  "status": "Initializing"
+  "business_rules": [
+    "Sai quá 3 câu phải chơi lại màn đó.",
+    "Bốc ngẫu nhiên câu hỏi mới mỗi lần chơi lại để tránh học vẹt.",
+    "Thắng màn trước mới mở khóa màn sau."
+  ],
+  "knowledge_items": {
+    "patterns": [
+      "AWF Agile workflow",
+      "Monorepo-style source organization"
+    ],
+    "conventions": [
+      "Lucide icons for kids UI",
+      "Bouncy animations for high engagement"
+    ]
+  }
 }

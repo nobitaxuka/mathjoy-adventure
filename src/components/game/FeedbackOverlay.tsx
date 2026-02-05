@@ -24,7 +24,7 @@ export const FeedbackOverlay: React.FC<FeedbackProps> = ({ type, onComplete }) =
                     initial={{ y: 0 }}
                     animate={{ y: [0, -50, 0] }}
                     transition={{ duration: 0.5, repeat: 1 }}
-                    className="text-9xl"
+                    className="text-7xl md:text-9xl"
                 >
                     🌟
                 </motion.div>
@@ -32,7 +32,7 @@ export const FeedbackOverlay: React.FC<FeedbackProps> = ({ type, onComplete }) =
                 <motion.div
                     animate={{ x: [-10, 10, -10, 10, 0] }}
                     transition={{ duration: 0.4 }}
-                    className="text-9xl"
+                    className="text-7xl md:text-9xl"
                 >
                     ❌
                 </motion.div>

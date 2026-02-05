@@ -1,0 +1,55 @@
+{
+    "updated_at": "2026-02-05T12:05:00Z",
+    "working_on": {
+        "feature": "V1 Core Gameplay",
+        "task": "Final Audit and GitHub Push",
+        "status": "Completed",
+        "files": [
+            "src/app/page.tsx",
+            "src/hooks/useGame.ts",
+            "src/lib/questions.ts"
+        ],
+        "notes": "Project is ready for V1.1 (adding more levels and real audio files)."
+    },
+    "pending_tasks": [
+        {
+            "task": "Thêm file âm thanh mp3 thực tế vào public/sounds/",
+            "priority": "high"
+        },
+        {
+            "task": "Xây dựng ngân hàng câu hỏi cho Level 3, 4, 5",
+            "priority": "medium"
+        },
+        {
+            "task": "Tách nhỏ các component từ page.tsx (Home, Map, GameBoard)",
+            "priority": "medium"
+        }
+    ],
+    "recent_changes": [
+        {
+            "timestamp": "2026-02-05",
+            "type": "initialization",
+            "description": "Project setup with AWF structure"
+        },
+        {
+            "timestamp": "2026-02-05",
+            "type": "feature",
+            "description": "Completed all 6 core development phases"
+        },
+        {
+            "timestamp": "2026-02-05",
+            "type": "deployment",
+            "description": "Successfully pushed to GitHub repository nobitaxuka/mathjoy-adventure"
+        }
+    ],
+    "decisions_made": [
+        {
+            "decision": "Dùng Framer Motion",
+            "reason": "Tạo animation mượt mà cho trẻ em"
+        },
+        {
+            "decision": "Lưu progress qua LocalStorage",
+            "reason": "Đơn giản hóa trải nghiệm người dùng không cần đăng nhập"
+        }
+    ]
+}
