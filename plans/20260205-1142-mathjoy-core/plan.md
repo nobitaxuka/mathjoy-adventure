@@ -17,7 +17,7 @@ Xây dựng lõi game MathJoy với hệ thống quản lý câu hỏi ngẫu nh
 | Phase | Name | Status | Progress |
 |-------|------|--------|----------|
 | 01 | Game Engine & Data Logic | ✅ Complete | 100% |
-| 02 | Core UI Components (Kids Style) | ⬜ Pending | 0% |
+| 02 | Core UI Components (Kids Style) | ✅ Complete | 100% |
 | 03 | Animation & Transitions | ⬜ Pending | 0% |
 | 04 | Level Progression & Persistence | ⬜ Pending | 0% |
 | 05 | Polish & Sound Effects | ⬜ Pending | 0% |
