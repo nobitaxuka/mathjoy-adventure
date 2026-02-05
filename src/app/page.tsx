@@ -4,10 +4,11 @@ import { useGame } from "@/hooks/useGame";
 import { HeartLife } from "@/components/game/HeartLife";
 import { ProgressBar } from "@/components/game/ProgressBar";
 import { GameButton } from "@/components/ui/GameButton";
-import { Trophy, Frown, Sparkles, Star, Lock, Play } from "lucide-react";
+import { Trophy, Frown, Sparkles, Star, Lock, Play, Zap } from "lucide-react";
 import { FeedbackOverlay } from "@/components/game/FeedbackOverlay";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useAudio } from "@/hooks/useAudio";
 
 export default function Home() {
   const {
@@ -26,13 +27,27 @@ export default function Home() {
     goToMenu,
   } = useGame();
 
+  const { playSound } = useAudio();
   const [feedback, setFeedback] = useState<"correct" | "wrong" | null>(null);
+  const [isShaking, setIsShaking] = useState(false);
+
+  useEffect(() => {
+    if (status === "VICTORY") playSound("victory");
+  }, [status, playSound]);
 
   const handleAnswer = (option: string) => {
     if (feedback) return;
 
     const isCorrect = currentQuestion?.correctAnswer === option;
     setFeedback(isCorrect ? "correct" : "wrong");
+
+    if (isCorrect) {
+      playSound("correct");
+    } else {
+      playSound("wrong");
+      setIsShaking(true);
+      setTimeout(() => setIsShaking(false), 500);
+    }
 
     setTimeout(() => {
       answerQuestion(option);
@@ -153,7 +168,10 @@ export default function Home() {
 
   // --- MÀN HÌNH ĐANG CHƠI (PLAYING) ---
   return (
-    <main className="min-h-screen flex flex-col items-center p-8 bg-[#fdf2f8] relative overflow-hidden">
+    <motion.main
+      animate={isShaking ? { x: [-10, 10, -10, 10, 0], backgroundColor: "#fee2e2" } : { x: 0, backgroundColor: "#fdf2f8" }}
+      className="min-h-screen flex flex-col items-center p-8 relative overflow-hidden transition-colors duration-300"
+    >
       <FeedbackOverlay type={feedback} onComplete={() => { }} />
 
       {/* Header: Lives & Progress */}
@@ -233,6 +251,6 @@ export default function Home() {
           <Sparkles className="text-white" size={64} />
         </div>
       </motion.div>
-    </main>
+    </motion.main>
   );
 }
