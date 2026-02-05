@@ -44,7 +44,7 @@ export default function Home() {
     if (status === "PLAYING" && currentQuestion && currentQuestion.category === "NUMBER_RECOGNITION") {
       // Đọc "Số [X]" với một chút delay nhỏ để đảm bảo stable
       const timer = setTimeout(() => {
-        speak(`Number ${currentQuestion.content}`);
+        speak(`Số ${currentQuestion.content}`);
       }, 150);
       return () => clearTimeout(timer);
     }
