@@ -178,7 +178,7 @@ export default function Home() {
       <motion.div
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        className="w-full max-w-3xl flex flex-col md:flex-row items-center justify-between mb-4 md:mb-12 gap-4 md:gap-6 z-10"
+        className="w-full max-w-3xl flex flex-col md:flex-row items-center justify-between mb-10 md:mb-12 gap-4 md:gap-6 z-10"
       >
         <div className="flex flex-row md:flex-col items-center md:items-start justify-between w-full md:w-auto gap-2">
           <button
@@ -210,8 +210,8 @@ export default function Home() {
               transition={{ type: "spring", damping: 20, stiffness: 100 }}
               className="text-center space-y-6 md:space-y-12"
             >
-              <div className="bg-white p-6 md:p-16 rounded-[2rem] md:rounded-[4rem] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.1)] border-b-[6px] md:border-b-[12px] border-gray-100 relative mb-6">
-                <span className="absolute -top-4 md:-top-6 left-1/2 -translate-x-1/2 px-6 md:px-10 py-2 md:py-3 bg-gradient-to-r from-yellow-400 to-orange-400 text-white rounded-full font-black shadow-lg text-lg md:text-xl uppercase italic whitespace-nowrap">
+              <div className="bg-white pt-16 pb-8 px-6 md:p-16 rounded-[2rem] md:rounded-[4rem] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.1)] border-b-[6px] md:border-b-[12px] border-gray-100 relative mb-6">
+                <span className="absolute -top-5 md:-top-6 left-1/2 -translate-x-1/2 px-6 md:px-10 py-2 md:py-3 bg-gradient-to-r from-yellow-400 to-orange-400 text-white rounded-full font-black shadow-lg text-lg md:text-xl uppercase italic whitespace-nowrap">
                   Màn {currentLevel}
                 </span>
                 <h3 className="text-4xl sm:text-6xl md:text-[8rem] lg:text-[10rem] font-black text-gray-800 leading-none tracking-tighter">
