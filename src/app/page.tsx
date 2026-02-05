@@ -65,7 +65,7 @@ export default function Home() {
           className="text-center mb-8 md:mb-12"
         >
           <div className="bg-white rounded-[2rem] md:rounded-[3rem] px-8 py-4 md:px-12 md:py-6 shadow-2xl mb-6 md:mb-8 inline-block">
-            <h1 className="text-4xl md:text-6xl font-black text-blue-600 tracking-tighter">MathJoy!</h1>
+            <h1 className="text-4xl md:text-6xl font-black text-blue-600 tracking-tighter">MathGame!</h1>
           </div>
           <h2 className="text-lg md:text-3xl font-black text-white drop-shadow-lg uppercase tracking-widest px-4">
             Chọn màn chơi của bé
