@@ -1,21 +1,35 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { GameState, GameStatus, Question } from "@/types/game";
 import { getRandomQuestions } from "@/lib/engine";
 
 const INITIAL_LIVES = 3;
 const QUESTIONS_PER_LEVEL = 10;
+const STORAGE_KEY = "mathjoy_max_level";
 
-export const useGame = (level: number = 1) => {
+export const useGame = () => {
+    const [maxUnlockedLevel, setMaxUnlockedLevel] = useState<number>(1);
     const [state, setState] = useState<GameState>({
         status: "START",
-        currentLevel: level,
+        currentLevel: 1,
         score: 0,
         lives: INITIAL_LIVES,
         currentQuestionIndex: 0,
         questions: [],
     });
+
+    // Load progress from LocalStorage
+    useEffect(() => {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+            setMaxUnlockedLevel(parseInt(saved, 10));
+        }
+    }, []);
+
+    const selectLevel = useCallback((level: number) => {
+        setState(prev => ({ ...prev, currentLevel: level }));
+    }, []);
 
     const startGame = useCallback(() => {
         const questions = getRandomQuestions(state.currentLevel, QUESTIONS_PER_LEVEL);
@@ -40,15 +54,17 @@ export const useGame = (level: number = 1) => {
             const newScore = isCorrect ? prev.score + 1 : prev.score;
             const nextIndex = prev.currentQuestionIndex + 1;
 
-            // Check for Game Over (failed more than 3 times - actually if lives reach 0)
             if (newLives <= 0) {
                 return { ...prev, lives: 0, status: "GAME_OVER" };
             }
 
-            // Check for Victory (finished all questions)
             if (nextIndex >= prev.questions.length) {
-                // Condition for victory: answer all questions and have lives remaining
-                // Actually the brief says "Sai quá 3 câu sẽ phải chơi lại", so if you finish all questions with lives > 0, you win.
+                // Victory!
+                const nextLevel = prev.currentLevel + 1;
+                if (nextLevel > maxUnlockedLevel) {
+                    setMaxUnlockedLevel(nextLevel);
+                    localStorage.setItem(STORAGE_KEY, nextLevel.toString());
+                }
                 return { ...prev, score: newScore, status: "VICTORY" };
             }
 
@@ -59,17 +75,24 @@ export const useGame = (level: number = 1) => {
                 currentQuestionIndex: nextIndex,
             };
         });
-    }, []);
+    }, [maxUnlockedLevel]);
 
     const resetGame = useCallback(() => {
         startGame();
     }, [startGame]);
 
+    const goToMenu = useCallback(() => {
+        setState(prev => ({ ...prev, status: "START" }));
+    }, []);
+
     return {
         ...state,
+        maxUnlockedLevel,
         currentQuestion: state.questions[state.currentQuestionIndex],
+        selectLevel,
         startGame,
         answerQuestion,
         resetGame,
+        goToMenu,
     };
 };

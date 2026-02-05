@@ -32,3 +32,19 @@ export const LEVEL_1_QUESTIONS: Question[] = [
     { id: "1-29", type: "CHOICE", level: 1, content: "8 + 1 = ?", options: ["7", "8", "9", "10"], correctAnswer: "9" },
     { id: "1-30", type: "CHOICE", level: 1, content: "4 - 3 = ?", options: ["0", "1", "2", "3"], correctAnswer: "1" },
 ];
+
+export const LEVEL_2_QUESTIONS: Question[] = [
+    { id: "2-1", type: "CHOICE", level: 2, content: "10 + 5 = ?", options: ["14", "15", "16", "17"], correctAnswer: "15" },
+    { id: "2-2", type: "CHOICE", level: 2, content: "12 - 2 = ?", options: ["8", "10", "12", "14"], correctAnswer: "10" },
+    { id: "2-3", type: "CHOICE", level: 2, content: "15 + 3 = ?", options: ["17", "18", "19", "20"], correctAnswer: "18" },
+    { id: "2-4", type: "CHOICE", level: 2, content: "20 - 5 = ?", options: ["10", "15", "20", "25"], correctAnswer: "15" },
+    { id: "2-5", type: "CHOICE", level: 2, content: "11 + 9 = ?", options: ["18", "19", "20", "21"], correctAnswer: "20" },
+    { id: "2-6", type: "CHOICE", level: 2, content: "14 - 4 = ?", options: ["10", "11", "12", "14"], correctAnswer: "10" },
+    { id: "2-7", type: "CHOICE", level: 2, content: "13 + 7 = ?", options: ["19", "20", "21", "22"], correctAnswer: "20" },
+    { id: "2-8", type: "CHOICE", level: 2, content: "18 - 8 = ?", options: ["8", "10", "12", "14"], correctAnswer: "10" },
+    { id: "2-9", type: "CHOICE", level: 2, content: "16 + 2 = ?", options: ["16", "17", "18", "19"], correctAnswer: "18" },
+    { id: "2-10", type: "CHOICE", level: 2, content: "19 - 9 = ?", options: ["9", "10", "11", "12"], correctAnswer: "10" },
+    // Thêm rút gọn cho demo
+    { id: "2-11", type: "CHOICE", level: 2, content: "10 + 10 = ?", options: ["15", "20", "25", "30"], correctAnswer: "20" },
+    { id: "2-12", type: "CHOICE", level: 2, content: "15 - 10 = ?", options: ["5", "10", "15", "20"], correctAnswer: "5" },
+];

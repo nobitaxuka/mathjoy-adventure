@@ -4,7 +4,7 @@ import { useGame } from "@/hooks/useGame";
 import { HeartLife } from "@/components/game/HeartLife";
 import { ProgressBar } from "@/components/game/ProgressBar";
 import { GameButton } from "@/components/ui/GameButton";
-import { Trophy, Frown, Sparkles, Star } from "lucide-react";
+import { Trophy, Frown, Sparkles, Star, Lock, Play } from "lucide-react";
 import { FeedbackOverlay } from "@/components/game/FeedbackOverlay";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
@@ -13,67 +13,86 @@ export default function Home() {
   const {
     status,
     currentLevel,
+    maxUnlockedLevel,
     score,
     lives,
     currentQuestionIndex,
     questions,
     currentQuestion,
+    selectLevel,
     startGame,
     answerQuestion,
     resetGame,
-  } = useGame(1);
+    goToMenu,
+  } = useGame();
 
   const [feedback, setFeedback] = useState<"correct" | "wrong" | null>(null);
 
   const handleAnswer = (option: string) => {
-    if (feedback) return; // Prevent double clicking
+    if (feedback) return;
 
     const isCorrect = currentQuestion?.correctAnswer === option;
     setFeedback(isCorrect ? "correct" : "wrong");
 
-    // Delay the actual logic to let animation play
     setTimeout(() => {
       answerQuestion(option);
       setFeedback(null);
     }, 800);
   };
 
-  // --- MÀN HÌNH CHỜ (START) ---
+  // --- MÀN HÌNH CHỌN LEVEL (START) ---
   if (status === "START") {
     return (
-      <main className="min-h-screen flex flex-col items-center justify-center p-4 bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400">
+      <main className="min-h-screen flex flex-col items-center justify-center p-8 bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400">
         <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ type: "spring", stiffness: 100 }}
-          className="text-center space-y-12"
+          initial={{ y: -50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          className="text-center mb-12"
         >
-          <div className="bg-white rounded-[4rem] p-16 shadow-[0_20px_50px_rgba(0,0,0,0.2)] transform rotate-2 border-b-[12px] border-gray-200 relative overflow-hidden">
-            <motion.div
-              animate={{ rotate: [0, 10, -10, 0] }}
-              transition={{ repeat: Infinity, duration: 4 }}
-              className="absolute -top-10 -left-10 text-yellow-300 opacity-20"
-            >
-              <Star size={120} fill="currentColor" />
-            </motion.div>
-            <h1 className="text-8xl font-black text-blue-600 mb-6 tracking-tighter drop-shadow-sm">
-              MathJoy!
-            </h1>
-            <p className="text-3xl text-gray-500 font-bold uppercase tracking-widest">
-              Học mà chơi - Cực kỳ vui!
-            </p>
+          <div className="bg-white rounded-[3rem] px-12 py-6 shadow-2xl mb-8 inline-block">
+            <h1 className="text-6xl font-black text-blue-600 tracking-tighter">MathJoy!</h1>
           </div>
-
-          <motion.div
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            className="flex justify-center"
-          >
-            <GameButton size="lg" variant="success" onClick={startGame} className="scale-125 rounded-[2.5rem] px-16">
-              Bắt đầu thôi! 🚀
-            </GameButton>
-          </motion.div>
+          <h2 className="text-3xl font-black text-white drop-shadow-lg uppercase tracking-widest">
+            Chọn màn chơi của bé
+          </h2>
         </motion.div>
+
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-8 max-w-4xl w-full px-4">
+          {[1, 2, 3, 4, 5, 6].map((lvl) => {
+            const isUnlocked = lvl <= maxUnlockedLevel;
+            return (
+              <motion.div
+                key={lvl}
+                whileHover={isUnlocked ? { scale: 1.05, rotate: 2 } : {}}
+                whileTap={isUnlocked ? { scale: 0.95 } : {}}
+                className="relative"
+              >
+                <button
+                  onClick={() => {
+                    if (isUnlocked) {
+                      selectLevel(lvl);
+                      startGame();
+                    }
+                  }}
+                  disabled={!isUnlocked}
+                  className={`w-full aspect-square rounded-[3rem] text-5xl font-black flex flex-col items-center justify-center gap-4 transition-all border-b-[12px] 
+                    ${isUnlocked
+                      ? "bg-white text-blue-500 border-blue-100 shadow-xl hover:shadow-2xl cursor-pointer"
+                      : "bg-gray-200/50 text-gray-400 border-gray-300 cursor-not-allowed"}`}
+                >
+                  <span className="text-xl uppercase font-bold text-gray-400">Màn</span>
+                  {lvl}
+                  {!isUnlocked && <Lock size={40} className="absolute top-6 right-6 text-gray-400" />}
+                  {isUnlocked && lvl === maxUnlockedLevel && (
+                    <div className="absolute -top-4 -right-4 bg-yellow-400 p-3 rounded-full shadow-lg animate-pulse">
+                      <Star size={24} fill="white" className="text-white" />
+                    </div>
+                  )}
+                </button>
+              </motion.div>
+            );
+          })}
+        </div>
       </main>
     );
   }
@@ -85,7 +104,7 @@ export default function Home() {
         <motion.div
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          className="text-center space-y-8 bg-white p-20 rounded-[5rem] shadow-2xl relative"
+          className="text-center space-y-8 bg-white p-20 rounded-[5rem] shadow-2xl relative max-w-2xl w-full"
         >
           <motion.div
             animate={{ scale: [1, 1.2, 1], rotate: [0, 10, -10, 0] }}
@@ -93,9 +112,15 @@ export default function Home() {
           >
             <Trophy size={160} className="text-yellow-500 mx-auto" />
           </motion.div>
-          <h2 className="text-6xl font-black text-green-600">Bé là Thiên Tài! 🏆</h2>
-          <p className="text-2xl font-bold text-gray-500">Bé đã vượt qua tất cả câu thách thức!</p>
-          <GameButton onClick={resetGame} variant="primary" size="lg">Tiếp tục hành trình</GameButton>
+          <h2 className="text-6xl font-black text-green-600 leading-tight">Tuyệt vời! <br />Bé là Thiên Tài!</h2>
+          <div className="flex flex-col gap-4">
+            <GameButton onClick={goToMenu} variant="primary" size="lg" className="w-full">
+              Tiếp tục hành trình
+            </GameButton>
+            <button onClick={resetGame} className="text-gray-400 font-bold hover:text-gray-600 transition-colors">
+              Chơi lại màn này
+            </button>
+          </div>
         </motion.div>
       </main>
     );
@@ -108,12 +133,19 @@ export default function Home() {
         <motion.div
           initial={{ x: -20, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
-          className="text-center space-y-8 bg-white p-20 rounded-[5rem] shadow-2xl"
+          className="text-center space-y-8 bg-white p-20 rounded-[5rem] shadow-2xl max-w-2xl w-full"
         >
           <Frown size={160} className="text-red-500 mx-auto" />
           <h2 className="text-6xl font-black text-red-600">Đừng bỏ cuộc bé nhé!</h2>
-          <p className="text-2xl font-bold text-gray-500">Cùng ôn bài lại một chút để thắng nhé!</p>
-          <GameButton onClick={resetGame} variant="danger" size="lg">Thử lại ngay</GameButton>
+          <p className="text-2xl font-bold text-gray-500">Thử lại một chút là thắng ngay thôi!</p>
+          <div className="flex flex-col gap-4">
+            <GameButton onClick={resetGame} variant="danger" size="lg" className="w-full">
+              Thử lại ngay
+            </GameButton>
+            <button onClick={goToMenu} className="text-gray-400 font-bold hover:text-gray-600 transition-colors">
+              Quay về bản đồ
+            </button>
+          </div>
         </motion.div>
       </main>
     );
@@ -130,7 +162,16 @@ export default function Home() {
         animate={{ y: 0, opacity: 1 }}
         className="w-full max-w-3xl flex items-center justify-between mb-16 z-10"
       >
-        <HeartLife lives={lives} />
+        <div className="flex flex-col gap-2">
+          <button
+            onClick={goToMenu}
+            className="text-gray-400 font-black flex items-center gap-2 hover:text-blue-500 transition-colors uppercase tracking-wider text-sm"
+          >
+            ← Thoát
+          </button>
+          <HeartLife lives={lives} />
+        </div>
+
         <div className="w-64 bg-white p-4 rounded-3xl shadow-lg border-2 border-white">
           <ProgressBar current={currentQuestionIndex} total={10} />
           <p className="text-center text-lg font-black text-blue-500 mt-2 uppercase tracking-wider">
@@ -139,21 +180,21 @@ export default function Home() {
         </div>
       </motion.div>
 
-      {/* Question Area - AnimatePresence for smooth transitions */}
+      {/* Question Area */}
       <div className="w-full max-w-3xl z-10">
         <AnimatePresence mode="wait">
           {currentQuestion && (
             <motion.div
-              key={currentQuestion.id}
+              key={`${currentQuestion.id}-${currentQuestionIndex}`}
               initial={{ x: 300, opacity: 0, rotate: 5 }}
               animate={{ x: 0, opacity: 1, rotate: 0 }}
               exit={{ x: -300, opacity: 0, rotate: -5 }}
               transition={{ type: "spring", damping: 20, stiffness: 100 }}
               className="text-center space-y-12"
             >
-              <div className="bg-white p-16 rounded-[4rem] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.1)] border-b-[12px] border-gray-100 relative group">
+              <div className="bg-white p-16 rounded-[4rem] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.1)] border-b-[12px] border-gray-100 relative">
                 <span className="absolute -top-6 left-1/2 -translate-x-1/2 px-10 py-3 bg-gradient-to-r from-yellow-400 to-orange-400 text-white rounded-full font-black shadow-lg text-xl uppercase italic">
-                  Level {currentLevel}
+                  Màn {currentLevel}
                 </span>
                 <h3 className="text-[10rem] font-black text-gray-800 leading-none tracking-tighter">
                   {currentQuestion.content}
@@ -182,21 +223,13 @@ export default function Home() {
         </AnimatePresence>
       </div>
 
-      {/* Decorative Background Elements */}
-      <div className="fixed -bottom-20 -left-20 w-80 h-80 bg-blue-200/30 rounded-full blur-3xl -z-10" />
-      <div className="fixed -top-20 -right-20 w-80 h-80 bg-purple-200/30 rounded-full blur-3xl -z-10" />
-
-      {/* Mascot Placeholder with stronger animation */}
+      {/* Mascot Placeholder */}
       <motion.div
-        animate={{
-          y: [0, -20, 0],
-          rotate: [0, 5, -5, 0]
-        }}
+        animate={{ y: [0, -20, 0], rotate: [0, 5, -5, 0] }}
         transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
         className="fixed bottom-12 right-12 z-20"
       >
         <div className="w-32 h-32 bg-yellow-300 rounded-[2rem] flex items-center justify-center border-8 border-white shadow-2xl rotate-12 relative">
-          <div className="absolute -top-2 -right-2 w-8 h-8 bg-pink-400 rounded-full border-4 border-white" />
           <Sparkles className="text-white" size={64} />
         </div>
       </motion.div>

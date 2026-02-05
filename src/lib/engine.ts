@@ -1,5 +1,5 @@
 import { Question } from "@/types/game";
-import { LEVEL_1_QUESTIONS } from "./questions";
+import { LEVEL_1_QUESTIONS, LEVEL_2_QUESTIONS } from "./questions";
 
 /**
  * Thuật toán Shuffle Fisher-Yates để xáo trộn mảng
@@ -21,6 +21,8 @@ export const getRandomQuestions = (level: number, count: number = 10): Question[
 
     if (level === 1) {
         allQuestions = LEVEL_1_QUESTIONS;
+    } else if (level === 2) {
+        allQuestions = LEVEL_2_QUESTIONS;
     }
     // Thêm các level khác ở đây sau này
 
