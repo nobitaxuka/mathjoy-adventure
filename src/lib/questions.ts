@@ -31,6 +31,11 @@ export const LEVEL_1_QUESTIONS: Question[] = [
     { id: "1-28", type: "CHOICE", level: 1, content: "2 + 7 = ?", options: ["8", "9", "10", "11"], correctAnswer: "9", category: "CALCULATION", tags: { ageGroup: "5-6", difficulty: "MEDIUM" } },
     { id: "1-29", type: "CHOICE", level: 1, content: "8 + 1 = ?", options: ["7", "8", "9", "10"], correctAnswer: "9", category: "CALCULATION", tags: { ageGroup: "5-6", difficulty: "MEDIUM" } },
     { id: "1-30", type: "CHOICE", level: 1, content: "4 - 3 = ?", options: ["0", "1", "2", "3"], correctAnswer: "1", category: "CALCULATION", tags: { ageGroup: "5-6", difficulty: "EASY" } },
+    { id: "1-31", type: "CHOICE", level: 1, content: "3 + 7 = ?", options: ["8", "9", "10", "11"], correctAnswer: "10", category: "CALCULATION", tags: { ageGroup: "5-6", difficulty: "HARD" } },
+    { id: "1-32", type: "CHOICE", level: 1, content: "10 - 6 = ?", options: ["3", "4", "5", "6"], correctAnswer: "4", category: "CALCULATION", tags: { ageGroup: "5-6", difficulty: "HARD" } },
+    { id: "1-33", type: "CHOICE", level: 1, content: "2 + 8 = ?", options: ["9", "10", "11", "12"], correctAnswer: "10", category: "CALCULATION", tags: { ageGroup: "5-6", difficulty: "HARD" } },
+    { id: "1-34", type: "CHOICE", level: 1, content: "9 - 5 = ?", options: ["3", "4", "5", "6"], correctAnswer: "4", category: "CALCULATION", tags: { ageGroup: "5-6", difficulty: "MEDIUM" } },
+    { id: "1-35", type: "CHOICE", level: 1, content: "5 + 4 = ?", options: ["7", "8", "9", "10"], correctAnswer: "9", category: "CALCULATION", tags: { ageGroup: "5-6", difficulty: "MEDIUM" } },
 ];
 
 export const LEVEL_2_QUESTIONS: Question[] = [
@@ -46,6 +51,14 @@ export const LEVEL_2_QUESTIONS: Question[] = [
     { id: "2-10", type: "CHOICE", level: 2, content: "19 - 9 = ?", options: ["9", "10", "11", "12"], correctAnswer: "10", category: "CALCULATION", tags: { ageGroup: "5-6", difficulty: "EASY" } },
     { id: "2-11", type: "CHOICE", level: 2, content: "10 + 10 = ?", options: ["15", "20", "25", "30"], correctAnswer: "20", category: "CALCULATION", tags: { ageGroup: "5-6", difficulty: "HARD" } },
     { id: "2-12", type: "CHOICE", level: 2, content: "15 - 10 = ?", options: ["5", "10", "15", "20"], correctAnswer: "5", category: "CALCULATION", tags: { ageGroup: "5-6", difficulty: "MEDIUM" } },
+    { id: "2-13", type: "CHOICE", level: 2, content: "14 + 6 = ?", options: ["18", "19", "20", "21"], correctAnswer: "20", category: "CALCULATION", tags: { ageGroup: "5-6", difficulty: "HARD" } },
+    { id: "2-14", type: "CHOICE", level: 2, content: "17 - 5 = ?", options: ["11", "12", "13", "14"], correctAnswer: "12", category: "CALCULATION", tags: { ageGroup: "5-6", difficulty: "MEDIUM" } },
+    { id: "2-15", type: "CHOICE", level: 2, content: "12 + 8 = ?", options: ["18", "19", "20", "21"], correctAnswer: "20", category: "CALCULATION", tags: { ageGroup: "5-6", difficulty: "HARD" } },
+    { id: "2-16", type: "CHOICE", level: 2, content: "19 - 4 = ?", options: ["14", "15", "16", "17"], correctAnswer: "15", category: "CALCULATION", tags: { ageGroup: "5-6", difficulty: "MEDIUM" } },
+    { id: "2-17", type: "CHOICE", level: 2, content: "13 + 5 = ?", options: ["17", "18", "19", "20"], correctAnswer: "18", category: "CALCULATION", tags: { ageGroup: "5-6", difficulty: "MEDIUM" } },
+    { id: "2-18", type: "CHOICE", level: 2, content: "20 - 10 = ?", options: ["5", "10", "15", "20"], correctAnswer: "10", category: "CALCULATION", tags: { ageGroup: "5-6", difficulty: "MEDIUM" } },
+    { id: "2-19", type: "CHOICE", level: 2, content: "11 + 7 = ?", options: ["17", "18", "19", "20"], correctAnswer: "18", category: "CALCULATION", tags: { ageGroup: "5-6", difficulty: "MEDIUM" } },
+    { id: "2-20", type: "CHOICE", level: 2, content: "16 - 3 = ?", options: ["11", "12", "13", "14"], correctAnswer: "13", category: "CALCULATION", tags: { ageGroup: "5-6", difficulty: "MEDIUM" } },
 ];
 
 export const RECOGNITION_QUESTIONS: Question[] = [
